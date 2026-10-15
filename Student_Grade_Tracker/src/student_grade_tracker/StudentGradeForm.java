@@ -42,6 +42,7 @@ public class StudentGradeForm extends javax.swing.JFrame {
         txtScore = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblGradeTracker = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -73,12 +74,30 @@ public class StudentGradeForm extends javax.swing.JFrame {
                 btnSubmitMouseClicked(evt);
             }
         });
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         btnReset.setBackground(new java.awt.Color(255, 255, 51));
         btnReset.setText("Reset");
         btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnResetMouseClicked(evt);
+            }
+        });
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(255, 0, 0));
+        btnDelete.setText("Delete Student");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
             }
         });
 
@@ -99,13 +118,16 @@ public class StudentGradeForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtScore, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnReset)))
+                        .addComponent(txtScore, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(btnReset)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +143,8 @@ public class StudentGradeForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
-                    .addComponent(btnReset))
+                    .addComponent(btnReset)
+                    .addComponent(btnDelete))
                 .addGap(44, 44, 44))
         );
 
@@ -136,6 +159,11 @@ public class StudentGradeForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblGradeTracker.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGradeTrackerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblGradeTracker);
 
         jLabel4.setText("Average Score");
@@ -278,6 +306,53 @@ public class StudentGradeForm extends javax.swing.JFrame {
         clearData();
     }//GEN-LAST:event_btnResetMouseClicked
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void tblGradeTrackerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGradeTrackerMouseClicked
+        // TODO add your handling code here:
+        int row = tblGradeTracker.getSelectedRow();
+        String id = tblGradeTracker.getModel().getValueAt(row, 0).toString();
+
+        String name = tblGradeTracker.getModel().getValueAt(row, 1).toString();
+
+        String score = tblGradeTracker.getModel().getValueAt(row, 2).toString();
+
+        txtName.setName(name);
+        txtScore.setText(score);
+
+
+    }//GEN-LAST:event_tblGradeTrackerMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        // TODO add your handling code here:
+        
+        int row = tblGradeTracker.getSelectedRow();
+        String id = tblGradeTracker.getModel().getValueAt(row, 0).toString();
+        int idStu=-1;
+        try {
+             idStu=Integer.parseInt(id)-1;
+        } catch (Exception e) {
+            return;
+        }
+        
+        list.remove(idStu);
+        
+        clearData();
+        
+        
+        
+        
+        
+
+
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
     public void clearData() {
         txtName.setText("");
         txtScore.setText("");
@@ -307,8 +382,6 @@ public class StudentGradeForm extends javax.swing.JFrame {
 
             showLowestName.setText(getLowest().getName());
             showLowestScore.setText(getLowest().getScore() + "");
-            
-            
 
         }
 
@@ -381,6 +454,7 @@ public class StudentGradeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
