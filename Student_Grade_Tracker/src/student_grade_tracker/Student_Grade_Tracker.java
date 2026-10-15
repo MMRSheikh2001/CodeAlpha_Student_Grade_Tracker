@@ -15,6 +15,9 @@ public class Student_Grade_Tracker {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        StudentGradeForm s = new StudentGradeForm();
+        s.setVisible(true);
     }
     
 }
