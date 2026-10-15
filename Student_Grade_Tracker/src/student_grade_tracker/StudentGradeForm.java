@@ -4,7 +4,10 @@
  */
 package student_grade_tracker;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +15,14 @@ import javax.swing.JOptionPane;
  */
 public class StudentGradeForm extends javax.swing.JFrame {
 
+    List<Student> list = new ArrayList<>();
+
     /**
      * Creates new form StudentGradeForm
      */
     public StudentGradeForm() {
         initComponents();
+        showGradeTable();
     }
 
     /**
@@ -38,6 +44,18 @@ public class StudentGradeForm extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblGradeTracker = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        showAverageScore = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        showHighestName = new javax.swing.JTextField();
+        showHighestScore = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        showLowestName = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        showLowestScore = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +76,11 @@ public class StudentGradeForm extends javax.swing.JFrame {
 
         btnReset.setBackground(new java.awt.Color(255, 255, 51));
         btnReset.setText("Reset");
+        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,12 +138,61 @@ public class StudentGradeForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblGradeTracker);
 
+        jLabel4.setText("Average Score");
+
+        showAverageScore.setEditable(false);
+
+        jLabel5.setText("Highest Grade");
+
+        jLabel6.setText("Name");
+
+        showHighestName.setEditable(false);
+
+        showHighestScore.setEditable(false);
+
+        jLabel7.setText("Score");
+
+        jLabel8.setText("Lowest Grade");
+
+        jLabel9.setText("Name");
+
+        showLowestName.setEditable(false);
+
+        jLabel10.setText("Score");
+
+        showLowestScore.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                    .addComponent(showAverageScore))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showHighestScore, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(showHighestName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showLowestName)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showLowestScore, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +200,33 @@ public class StudentGradeForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 270, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(showAverageScore, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(showHighestName, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(showLowestName))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showHighestScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showLowestScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -142,20 +240,112 @@ public class StudentGradeForm extends javax.swing.JFrame {
 
         if (name.isEmpty() || scoreText.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Give Name and Score");
+            return;
+
+        }
+        double score = -1;
+
+        try {
+            score = Double.parseDouble(scoreText);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid Input");
+            return;
+        }
+
+        if (score < 0 || score > 100) {
+            JOptionPane.showMessageDialog(null, "Invalid Input");
+            return;
 
         }
 
         Student student = new Student();
 
         student.setName(name);
-        student.setScore(Double.valueOf(scoreText));
-        
-        
+        student.setScore(score);
+
+        list.add(student);
+
+        showGradeTable();
+        clearData();
 
 
     }//GEN-LAST:event_btnSubmitMouseClicked
 
+    private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
+        // TODO add your handling code here:
+
+        clearData();
+    }//GEN-LAST:event_btnResetMouseClicked
+
+    public void clearData() {
+        txtName.setText("");
+        txtScore.setText("");
+    }
+
+    public void showGradeTable() {
+
+        String[] stuList = {"SL", "Name", "Score", "Grade"};
+
+        DefaultTableModel model = new DefaultTableModel();
+
+        model.setColumnIdentifiers(stuList);
+
+        tblGradeTracker.setModel(model);
+
+        for (int i = 0; i < list.size(); i++) {
+            Student s = list.get(i);
+            model.addRow(new Object[]{(i + 1), s.getName(), s.getScore(), s.getLetterGrade()});
+
+        }
+
+        if (!list.isEmpty()) {
+
+            showAverageScore.setText(getAverage() + "");
+            showHighestName.setText(getHighest().getName());
+            showHighestScore.setText(getHighest().getScore() + "");
+
+            showLowestName.setText(getLowest().getName());
+            showLowestScore.setText(getLowest().getScore() + "");
+            
+            
+
+        }
+
+    }
+
+    // Calulations
+    private double getAverage() {
+        double sum = 0;
+        for (Student s : list) {
+            sum += s.getScore();
+        }
+        return sum / list.size();
+    }
+
+    private Student getHighest() {
+        Student best = list.get(0);
+        for (Student s : list) {
+            if (s.getScore() > best.getScore()) {
+                best = s;
+            }
+        }
+        return best;
+    }
+
+    private Student getLowest() {
+        Student worst = list.get(0);
+        for (Student s : list) {
+            if (s.getScore() < worst.getScore()) {
+                worst = s;
+
+            }
+        }
+        return worst;
+    }
+
     /**
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -194,10 +384,22 @@ public class StudentGradeForm extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField showAverageScore;
+    private javax.swing.JTextField showHighestName;
+    private javax.swing.JTextField showHighestScore;
+    private javax.swing.JTextField showLowestName;
+    private javax.swing.JTextField showLowestScore;
     private javax.swing.JTable tblGradeTracker;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtScore;
