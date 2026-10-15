@@ -258,6 +258,7 @@ public class StudentGradeForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMouseClicked
@@ -323,7 +324,7 @@ public class StudentGradeForm extends javax.swing.JFrame {
 
         String score = tblGradeTracker.getModel().getValueAt(row, 2).toString();
 
-        txtName.setName(name);
+        txtName.setText(name);
         txtScore.setText(score);
 
 
@@ -331,24 +332,20 @@ public class StudentGradeForm extends javax.swing.JFrame {
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
-        
+
         int row = tblGradeTracker.getSelectedRow();
         String id = tblGradeTracker.getModel().getValueAt(row, 0).toString();
-        int idStu=-1;
+        int idStu = -1;
         try {
-             idStu=Integer.parseInt(id)-1;
+            idStu = Integer.parseInt(id) - 1;
         } catch (Exception e) {
             return;
         }
-        
+
         list.remove(idStu);
-        
+
         clearData();
-        
-        
-        
-        
-        
+        showGradeTable();
 
 
     }//GEN-LAST:event_btnDeleteMouseClicked
