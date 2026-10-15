@@ -342,8 +342,13 @@ public class StudentGradeForm extends javax.swing.JFrame {
             return;
         }
 
-        list.remove(idStu);
+        if (idStu >= 0) {
+            list.remove(idStu);
+        } else {
+            JOptionPane.showMessageDialog(null, "First Select a table item to delete");
+            return;
 
+        }
         clearData();
         showGradeTable();
 
