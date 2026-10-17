@@ -385,6 +385,15 @@ public class StudentGradeForm extends javax.swing.JFrame {
             showLowestName.setText(getLowest().getName());
             showLowestScore.setText(getLowest().getScore() + "");
 
+        } else {
+
+            showAverageScore.setText(0 + "");
+            showHighestName.setText("");
+            showHighestScore.setText("");
+
+            showLowestName.setText("");
+            showLowestScore.setText("");
+
         }
 
     }
